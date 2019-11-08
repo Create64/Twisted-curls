@@ -1,0 +1,13 @@
+<launch>
+
+<param name="robot_description" textfile="$(find randomwalker)/urdf/cart.urdf" />
+<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" />
+
+<node name="record" pkg="rosbag" type="play" args="/home/nooshin/Documents/AHRInw.bag --clock" />
+
+<node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node" />
+
+
+
+
+</launch>

@@ -1,0 +1,23 @@
+<launch>
+
+<param name="robot_description" textfile="$(find randomwalker)/urdf/cart_bag_1.urdf" />
+<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" />
+
+<node name="record" pkg="rosbag" type="play" args="/home/nooshin/Documents/AHRInw.bag --clock --loop" />
+
+<node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node" />
+
+
+
+  
+<include file="$(find randomwalker)/launch/pcl.launch">
+  </include>
+
+<node pkg="gps_common" type="utm_odometry_node" name="utm_odometry_node" >
+  <remap from="/fix" to="/piksi/navsatfix_best_fix" />
+</node>
+
+
+<node pkg="randomwalker" type="listener.py " name="listener.py" />
+
+</launch>
